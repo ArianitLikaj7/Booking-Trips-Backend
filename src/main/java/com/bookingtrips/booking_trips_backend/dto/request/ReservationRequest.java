@@ -1,5 +1,6 @@
 package com.bookingtrips.booking_trips_backend.dto.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,10 +10,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String email;
-    private String password;
+public class ReservationRequest {
+    @NotNull
+    private Long tripId;
+    private int  seatNumber;
 }
