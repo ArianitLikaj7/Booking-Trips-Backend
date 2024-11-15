@@ -9,7 +9,7 @@ RUN mvn clean package -DskipTests
 # Package stage
 #
 FROM openjdk:17-jdk-slim
-COPY --from=build /target/BookingTripsBackend-0.0.1-SNAPSHOT.jar BookingTripsBackend.jar
+COPY --from=build /target/booking-trips-backend-0.0.1-SNAPSHOT.jar booking-trips-backend.jar
 # ENV PORT=8080
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","BookingTripsBackend.jar"]
+ENTRYPOINT ["java","-jar","booking-trips-backend.jar"]
