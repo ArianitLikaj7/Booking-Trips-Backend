@@ -43,4 +43,16 @@ public class UserController {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<Void> sendPasswordResetEmail(@RequestParam String email) {
+        userService.sendPasswordResetEmail(email);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<Void> changePassword(@RequestParam Long userId, @RequestParam String oldPassword, @RequestParam String newPassword) {
+        userService.changePassword(userId, oldPassword, newPassword);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

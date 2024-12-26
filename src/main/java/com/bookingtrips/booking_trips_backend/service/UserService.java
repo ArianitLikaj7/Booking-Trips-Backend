@@ -10,7 +10,10 @@ import com.bookingtrips.booking_trips_backend.mapper.UserMapper;
 import com.bookingtrips.booking_trips_backend.util.ReflectionUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,10 +28,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final JavaMailSender javaMailSender;
 
     @Transactional
     public UserDto create(UserRequest request){
-      if(userRepository.existsByUsername(request.getUsername())){
+      if(userRepository.existsByUsername(request.getUsername()) || userRepository.existsByEmail(request.getEmail())){
           throw new UserAlreadyExists(String.format(
                   "User with this %s username already exist",request.getUsername()
           ));
@@ -77,4 +81,32 @@ public class UserService {
     public void delete(Long id){
         userRepository.deleteById(id);
     }
+
+    public void sendPasswordResetEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() ->
+                new ResourceNotFoundException("User with email " + email + " not found"));
+        String newPassword = generateRandomPassword();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(user.getEmail());
+        mailMessage.setSubject("Password Reset Request");
+        mailMessage.setText("Your new password is: " + newPassword);
+        javaMailSender.send(mailMessage);
+    }
+
+    private String generateRandomPassword() {
+        return RandomStringUtils.randomAlphanumeric(12);
+    }
+
+    public void changePassword(Long userId, String oldPassword, String newPassword) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User with id " + userId + " not found"));
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new IllegalArgumentException("Old password is incorrect");
+        }
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
 }
