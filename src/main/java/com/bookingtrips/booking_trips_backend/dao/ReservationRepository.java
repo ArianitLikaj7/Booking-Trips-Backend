@@ -6,9 +6,11 @@ import com.bookingtrips.booking_trips_backend.dto.TripDto;
 import com.bookingtrips.booking_trips_backend.entity.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
     boolean existsByUserIdAndTripId(Long tripId,Long userId);
@@ -20,7 +22,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     Long countReservation(Long userId);
 
     @Query("SELECT new com.bookingtrips.booking_trips_backend.dto.UserDto(" +
-            "u.id, u.firstName, u.lastName, u.username, u.role) " +
+            "u.id, u.firstName, u.lastName, u.username, u.email, u.role) " +
             "FROM User u " +
             "JOIN Reservation r ON u.id = r.userId " +
             "JOIN Trip t ON r.tripId = t.id " +
