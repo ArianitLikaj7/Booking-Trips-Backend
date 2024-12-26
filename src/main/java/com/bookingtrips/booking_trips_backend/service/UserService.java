@@ -73,4 +73,8 @@ public class UserService {
 
         return userMapper.toDto(loggedUser);
     }
+
+    public void delete(Long id){
+        userRepository.deleteById(id);
+    }
 }
