@@ -15,5 +15,5 @@ values (1,
         'Arianit',
         'Likaj',
         'superadmin',
-        '$2a$12$3qXN7Jr.fO.0sZVbTJ9lNuFWOQ/c1cEgV8/KjRlKmwRqMAx9K1NLy',
+        '$2a$12$Y4EY97bPUPBh3SC.7zgUj.F77zwSCYQT8QjhmTg.jVv3BUKEKBiPK',
         'SUPER_ADMIN');
