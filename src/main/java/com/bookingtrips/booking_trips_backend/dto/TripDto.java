@@ -21,5 +21,6 @@ public class TripDto {
     private Double price;
     private String title;
     private String description;
+    private String imageUrl;
     private TypeOfTrip typeOfTrip;
 }

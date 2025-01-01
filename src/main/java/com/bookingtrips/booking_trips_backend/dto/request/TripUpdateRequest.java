@@ -18,5 +18,6 @@ public class TripUpdateRequest {
     private String destination;
     private int availableSeats;
     private int totalSeats;
+    private String imageUrl;
     private String route;
 }

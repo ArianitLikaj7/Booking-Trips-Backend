@@ -42,6 +42,9 @@ public class Trip extends BaseEntity{
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "type_of_trip")
     private TypeOfTrip typeOfTrip;

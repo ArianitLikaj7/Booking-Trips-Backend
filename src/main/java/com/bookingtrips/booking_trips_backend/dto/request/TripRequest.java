@@ -18,8 +18,7 @@ public class TripRequest {
     @Size(min = 1, max = 255, message = "Destination must be between 1 and 255 characters")
     private String destination;
 
-    @NotNull(message = "Available seats cannot be null")
-    @Positive(message = "Available seats must be a positive number")
+
     private int availableSeats;
 
     @NotNull(message = "Total seats cannot be null")
@@ -39,6 +38,8 @@ public class TripRequest {
 
     @Size(min = 1, max = 500, message = "Description must be between 1 and 500 characters")
     private String description;
+
+    private String imageUrl;
 
     @NotNull(message = "Type of trip cannot be null")
     private TypeOfTrip typeOfTrip;

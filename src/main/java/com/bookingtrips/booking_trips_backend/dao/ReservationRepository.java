@@ -34,7 +34,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query("SELECT new com.bookingtrips.booking_trips_backend.dto.TripDto(" +
             "t.id, t.createdBy, t.origin, t.destination, t.availableSeats, " +
-            "t.totalSeats, t.route, t.price, t.title, t.description, t.typeOfTrip) " +
+            "t.totalSeats, t.route, t.price, t.title, t.description, t.imageUrl, t.typeOfTrip) " +
             "FROM Trip t JOIN Reservation r ON t.id = r.tripId WHERE r.userId = :userId")
     List<TripDto> findMyReservations(Long userId);
 
