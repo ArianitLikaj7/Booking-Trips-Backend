@@ -18,6 +18,9 @@ public class Trip extends BaseEntity{
     @Column(name = "created_by")
     private Long createdBy;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "origin")
     private String origin;
 

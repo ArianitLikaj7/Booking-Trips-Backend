@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TripDto {
     private Long id;
+    private String name;
     private Long createdBy;
     private String origin;
     private String destination;

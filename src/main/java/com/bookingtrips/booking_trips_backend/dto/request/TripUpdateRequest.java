@@ -14,6 +14,7 @@ public class TripUpdateRequest {
     @NotNull
     private Long id;
     @NotNull private Long userId;
+    private String name;
     private String origin;
     private String destination;
     private int availableSeats;
