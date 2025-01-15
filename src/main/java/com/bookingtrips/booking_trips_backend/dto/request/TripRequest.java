@@ -15,7 +15,7 @@ public class TripRequest {
     private String origin;
 
     @NotNull(message = "Name cannot be null")
-    private String name;
+    private String companyName;
 
     @NotNull(message = "Destination cannot be null")
     @Size(min = 1, max = 255, message = "Destination must be between 1 and 255 characters")
